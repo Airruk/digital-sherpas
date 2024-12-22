@@ -3,9 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { HeroSection } from "./(components)/hero-section";
-import { FeaturesSection } from "./(components)/features-section";
-import { TestimonialsSection } from "./(components)/testimonials-section";
+import { HeroSection } from "../(components)/hero-section";
+import { FeaturesSection } from "../(components)/features-section";
+import { TestimonialsSection } from "../(components)/testimonials-section";
 
 export default function Home() {
   return (
