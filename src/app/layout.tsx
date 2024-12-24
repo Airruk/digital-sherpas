@@ -2,17 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Navbar } from "./(components)/navbar";
 import { ThemeToggle } from "./(components)/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, XIcon } from "lucide-react";
 import "./globals.css";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <html>
+    <html lang="en">
         <body>
             <div className="min-h-screen bg-background text-foreground">
       <header
