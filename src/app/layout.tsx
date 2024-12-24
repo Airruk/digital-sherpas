@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeToggle } from "./(components)/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -20,9 +21,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <img
-                src="https://assets.polymet.ai/faithful-salmon-585566"
+              <Image
+                src="/images/ds-logo.png"
                 alt="Digital Sherpas"
+                width={32}
+                height={32}
                 className="h-8 w-8"
               />
 
@@ -111,9 +114,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div
               className="flex items-center space-x-2 mb-4 md:mb-0"
             >
-              <img
-                src="https://assets.polymet.ai/faithful-salmon-585566"
+              <Image
+                src="/images/ds-logo.png"
                 alt="Digital Sherpas"
+                width={24}
+                height={24}
                 className="h-6 w-6"
               />
 

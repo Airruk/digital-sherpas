@@ -3,7 +3,6 @@
 import React from "react";
 import {
   Card,
-  CardContent,
   CardHeader,
   CardFooter,
 } from "@/components/ui/card";
@@ -25,7 +24,7 @@ export function TestimonialsSection() {
       role: "Marketing Director, GrowthCo",
       image: "https://picsum.photos/seed/michael/200/200",
       content:
-        "The team's expertise and dedication to our success made all the difference. Highly recommended!",
+        "The team&apos;s expertise and dedication to our success made all the difference. Highly recommended!",
       rating: 5,
     },
     {
@@ -46,7 +45,7 @@ export function TestimonialsSection() {
             What Our Clients Say
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our clients have to say
+            Don&apos;t just take our word for it. Here&apos;s what our clients have to say
             about their journey with Digital Sherpas.
           </p>
         </div>
@@ -75,7 +74,7 @@ export function TestimonialsSection() {
                   className="text-muted-foreground italic"
                   id={`5lbzi2_${index}`}
                 >
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
               </CardHeader>
               <CardFooter id={`r3e5aq_${index}`}>

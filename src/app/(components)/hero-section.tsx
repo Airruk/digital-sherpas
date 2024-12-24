@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 
@@ -47,10 +48,13 @@ export function HeroSection() {
 
           <div className="relative">
             <div className="relative z-10 animate-float">
-              <img
-                src="https://assets.polymet.ai/faithful-salmon-585566"
+              <Image
+                src="/images/ds-logo.png"
                 alt="Digital Sherpa Mascot"
                 className="w-full max-w-md mx-auto"
+                width={500}
+                height={500}
+                priority
               />
             </div>
             {/* Decorative background elements */}
