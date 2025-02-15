@@ -1,68 +1,52 @@
 'use client';
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CompassIcon, BarChartIcon, RocketIcon, HeartIcon } from "lucide-react";
+import { Typography } from "@/components/design-system/atoms/Typography";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/design-system/molecules/Card";
+import { Rocket, Puzzle, LineChart } from "lucide-react";
+import { Icon } from "@/components/design-system/atoms/Icon";
+
+const features = [
+  {
+    title: "AI Strategy & Implementation",
+    description: "We don't just plan; we build. We craft an AI roadmap that aligns with your goals and deliver working solutions fast.",
+    icon: LineChart
+  },
+  {
+    title: "Seamless Integration",
+    description: "Whether you use legacy systems or cutting-edge tools, our AI solutions plug into your business without disrupting operations.",
+    icon: Puzzle
+  },
+  {
+    title: "Scalable & Future-Proof",
+    description: "We don't just deliver quick fixes. We build AI-powered systems that evolve with your business, ensuring long-term impact.",
+    icon: Rocket
+  }
+];
 
 export function FeaturesSection() {
-  const features = [
-    {
-      icon: CompassIcon,
-      title: "Expert Navigation",
-      description:
-        "Let us guide you through the complex digital landscape with our expertise and experience.",
-    },
-    {
-      icon: BarChartIcon,
-      title: "Data-Driven Growth",
-      description:
-        "Make informed decisions with our analytics-based approach to digital strategy.",
-    },
-    {
-      icon: RocketIcon,
-      title: "Rapid Implementation",
-      description:
-        "Quick and efficient execution of strategies to help you reach your goals faster.",
-    },
-    {
-      icon: HeartIcon,
-      title: "Dedicated Support",
-      description:
-        "Round-the-clock support from our team of digital Sherpas who care about your success.",
-    },
-  ];
-
   return (
-    <section className="py-20">
+    <section className="py-20 bg-muted/50 dark:bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">
-            Why Choose Digital Sherpas?
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            We combine expertise with dedication to help you navigate the
-            digital landscape and achieve your business goals.
-          </p>
+          <Typography variant="h2" className="mb-4">
+            How We Deliver AI Transformation
+          </Typography>
         </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="border-border/50 bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-colors"
-              id={`26f3qu_${index}`}
-            >
-              <CardHeader id={`xt6e0e_${index}`}>
-                <feature.icon
-                  className="h-12 w-12 text-primary mb-4"
-                  id={`6s936x_${index}`}
-                />
-                <CardTitle id={`fvsp5e_${index}`}>{feature.title}</CardTitle>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((feature) => (
+            <Card key={feature.title} className="border-none shadow-lg bg-background dark:bg-muted hover:scale-105 transition-transform duration-300">
+              <CardHeader>
+                <div className="mb-4 w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
+                  <Icon icon={feature.icon} className="text-primary" />
+                </div>
+                <CardTitle>{feature.title}</CardTitle>
               </CardHeader>
-              <CardContent id={`038gz9_${index}`}>
-                <p className="text-muted-foreground" id={`bn4sop_${index}`}>
+              <CardContent>
+                <Typography variant="body" className="text-muted-foreground">
                   {feature.description}
-                </p>
+                </Typography>
               </CardContent>
             </Card>
           ))}

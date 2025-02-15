@@ -2,10 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/design-system/atoms/Button";
+import { Typography } from "@/components/design-system/atoms/Typography";
 import { HeroSection } from "./(components)/hero-section";
 import { FeaturesSection } from "./(components)/features-section";
 import { TestimonialsSection } from "./(components)/testimonials-section";
+import { Mail } from "lucide-react";
+import { Icon } from "@/components/design-system/atoms/Icon";
 
 export default function Home() {
   return (
@@ -15,20 +18,19 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary/5">
+      <section className="py-20 bg-muted/50 dark:bg-muted/10">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Start Your Digital Journey?
-          </h2>
-          <p
-            className="text-muted-foreground mb-8 max-w-2xl mx-auto"
-          >
-            Let our experienced Sherpas guide you through the digital landscape
-            and help you reach new heights.
-          </p>
-          <Button asChild size="lg" className="px-8">
-            <Link href="/contact">
-              Contact Us Today
+          <Typography variant="h2" className="mb-4">
+            Let&apos;s Build Smarter AI Together
+          </Typography>
+          <Typography variant="body" className="mb-8 max-w-2xl mx-auto text-muted-foreground dark:text-muted-foreground/80">
+            AI isn&apos;t just a buzzword—it&apos;s a powerful tool for transformation. 
+            Let&apos;s build AI solutions that actually make a difference for your business.
+          </Typography>
+          <Button asChild size="lg">
+            <Link href="/contact" className="flex items-center gap-2">
+              <Icon icon={Mail} size="sm" />
+              Get in touch today
             </Link>
           </Button>
         </div>

@@ -1,114 +1,63 @@
 'use client';
 
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { StarIcon } from "lucide-react";
+import { Typography } from "@/components/design-system/atoms/Typography";
+import { Card, CardContent } from "@/components/design-system/molecules/Card";
+import { Quote } from "lucide-react";
+import { Icon } from "@/components/design-system/atoms/Icon";
+
+const testimonials = [
+  {
+    quote: "&ldquo;Digital Sherpas helped us implement an AI-powered chatbot to streamline customer support, allowing us to scale without a proportional increase in headcount. The efficiency gains were immediate.&rdquo;",
+    author: "Josh Berg",
+    title: "CEO",
+    company: "Company Name"
+  },
+  {
+    quote: "&ldquo;They seamlessly plugged into product leadership at SRS, helping us pivot our tech stack and approach how to practically incorporate AI into our overall strategy. The results were transformative.&rdquo;",
+    author: "Adam Lee",
+    title: "CEO",
+    company: "StudentRoomStay"
+  },
+  {
+    quote: "&ldquo;By replacing outdated systems with AI-driven solutions, Digital Sherpas helped us streamline ordering processes for our government customers. The efficiency gains have been remarkable.&rdquo;",
+    author: "Anthony Billes",
+    title: "Founder",
+    company: "Elephino Supply"
+  }
+];
 
 export function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO, TechStart",
-      image: "https://picsum.photos/seed/sarah/200/200",
-      content:
-        "Digital Sherpas transformed our online presence. Their guidance was invaluable in helping us reach new heights.",
-      rating: 5,
-    },
-    {
-      name: "Michael Chen",
-      role: "Marketing Director, GrowthCo",
-      image: "https://picsum.photos/seed/michael/200/200",
-      content:
-        "The team&apos;s expertise and dedication to our success made all the difference. Highly recommended!",
-      rating: 5,
-    },
-    {
-      name: "Emma Davis",
-      role: "Founder, InnovateLab",
-      image: "https://picsum.photos/seed/emma/200/200",
-      content:
-        "Working with Digital Sherpas was a game-changer for our business. They truly understand digital strategy.",
-      rating: 5,
-    },
-  ];
-
   return (
-    <section className="py-20 bg-primary/5">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our clients have to say
-            about their journey with Digital Sherpas.
-          </p>
+          <Typography variant="h2" className="mb-4">
+            Real-World Results from Our Clients
+          </Typography>
         </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card
-              key={index}
-              className="border-border/50 bg-background/50 backdrop-blur-sm"
-              id={`wmzh4u_${index}`}
-            >
-              <CardHeader id={`5nc97n_${index}`}>
-                <div
-                  className="flex items-center space-x-1 mb-4"
-                  id={`hb6s2t_${index}`}
-                >
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      className="h-4 w-4 fill-primary text-primary"
-                      id={`c8ex65_${index}`}
-                    />
-                  ))}
-                </div>
-                <p
-                  className="text-muted-foreground italic"
-                  id={`5lbzi2_${index}`}
-                >
-                  &quot;{testimonial.content}&quot;
-                </p>
-              </CardHeader>
-              <CardFooter id={`r3e5aq_${index}`}>
-                <div
-                  className="flex items-center space-x-4"
-                  id={`ieqd7p_${index}`}
-                >
-                  <Avatar id={`31zqnc_${index}`}>
-                    <AvatarImage
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      id={`vhjds5_${index}`}
-                    />
-
-                    <AvatarFallback id={`hq9tbl_${index}`}>
-                      {testimonial.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div id={`2kh7x2_${index}`}>
-                    <div className="font-semibold" id={`z51vh9_${index}`}>
-                      {testimonial.name}
-                    </div>
-                    <div
-                      className="text-sm text-muted-foreground"
-                      id={`t1ays4_${index}`}
-                    >
-                      {testimonial.role}
-                    </div>
+            <Card key={index} className="relative bg-muted/50 dark:bg-muted/10 border-none">
+              <CardContent className="pt-12">
+                <div className="absolute top-6 left-6">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
+                    <Icon icon={Quote} className="text-primary" />
                   </div>
                 </div>
-              </CardFooter>
+                <Typography variant="body" className="mb-6 italic">
+                  {testimonial.quote}
+                </Typography>
+                <div>
+                  <Typography variant="h4" className="text-base font-semibold">
+                    {testimonial.author}
+                  </Typography>
+                  <Typography variant="caption">
+                    {testimonial.title}, {testimonial.company}
+                  </Typography>
+                </div>
+              </CardContent>
             </Card>
           ))}
         </div>
