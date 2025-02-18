@@ -1,40 +1,38 @@
 'use client';
 
 import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/design-system/atoms/Button";
-import { Typography } from "@/components/design-system/atoms/Typography";
-import { HeroSection } from "./(components)/hero-section";
-import { FeaturesSection } from "./(components)/features-section";
-import { TestimonialsSection } from "./(components)/testimonials-section";
-import { Mail } from "lucide-react";
-import { Icon } from "@/components/design-system/atoms/Icon";
+import { HeroSection } from "./(sections)/hero-section";
+import { ValueProposition } from "./(sections)/value-proposition";
+import { CoreServices } from "./(sections)/core-services";
+import { CaseStudies } from "./(sections)/case-studies";
+import { Pricing } from "./(sections)/pricing";
+import { FinalCTA } from "./(sections)/final-cta";
+import { ContactForm } from "./(components)/contact-form";
 
 export default function Home() {
   return (
-    <div>
+    <main className="overflow-hidden">
       <HeroSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-
-      {/* CTA Section */}
-      <section className="py-20 bg-muted/50 dark:bg-muted/10">
-        <div className="container mx-auto px-4 text-center">
-          <Typography variant="h2" className="mb-4">
-            Let&apos;s Build Smarter AI Together
-          </Typography>
-          <Typography variant="body" className="mb-8 max-w-2xl mx-auto text-muted-foreground dark:text-muted-foreground/80">
-            AI isn&apos;t just a buzzword—it&apos;s a powerful tool for transformation. 
-            Let&apos;s build AI solutions that actually make a difference for your business.
-          </Typography>
-          <Button asChild size="lg">
-            <Link href="/contact" className="flex items-center gap-2">
-              <Icon icon={Mail} size="sm" />
-              Get in touch today
-            </Link>
-          </Button>
+      <ValueProposition />
+      <CoreServices />
+      <CaseStudies />
+      <Pricing />
+      <FinalCTA />
+      <section id="contact" className="scroll-mt-24 bg-muted">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold lg:tracking-tight mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Ready to start your product journey? Let&apos;s discuss how we can help you achieve your goals.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <ContactForm />
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
