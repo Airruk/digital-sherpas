@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Typography } from "@/components/design-system/atoms/Typography";
 import { Button } from "@/components/design-system/atoms/Button";
 import { Card } from "@/components/design-system/molecules/Card";
-import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+import { Mail, Phone, Loader2 } from "lucide-react";
 import { Icon } from "@/components/design-system/atoms/Icon";
 import emailjs from '@emailjs/browser';
 
@@ -79,35 +79,17 @@ export function ContactForm() {
         <div className="space-y-6">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
-              <Icon icon={MapPin} className="text-primary" />
-            </div>
-            <div>
-              <Typography variant="h4" className="mb-1">
-                Address
-              </Typography>
-              <Typography variant="body" className="text-muted-foreground">
-                5457 Santa Fe Road
-              </Typography>
-              <Typography variant="body" className="text-muted-foreground">
-                Atascadero, CA 93422
-              </Typography>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
               <Icon icon={Mail} className="text-primary" />
             </div>
             <div>
               <Typography variant="h4" className="mb-1">
                 Email
               </Typography>
-              <a 
-                href="mailto:hello@digitalsherpas.co"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                hello@digitalsherpas.co
-              </a>
+              <Typography variant="body" className="text-muted-foreground">
+                <a href="mailto:hello@digitalsherpas.co" className="hover:text-primary transition-colors">
+                  hello@digitalsherpas.co
+                </a>
+              </Typography>
             </div>
           </div>
 
@@ -119,21 +101,17 @@ export function ContactForm() {
               <Typography variant="h4" className="mb-1">
                 Phone
               </Typography>
-              <a 
-                href="tel:+19492367837"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                (949) 236-7837
-              </a>
+              <Typography variant="body" className="text-muted-foreground">
+                <a href="tel:+18055550123" className="hover:text-primary transition-colors">
+                  (805) 555-0123
+                </a>
+              </Typography>
             </div>
           </div>
         </div>
       </div>
 
       <Card className="p-6">
-        <Typography variant="h3" className="mb-6">
-          Send us a Message
-        </Typography>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -145,9 +123,8 @@ export function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md bg-background dark:border-muted"
-              placeholder="Your name"
               required
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
             />
           </div>
 
@@ -161,9 +138,8 @@ export function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md bg-background dark:border-muted"
-              placeholder="your@email.com"
               required
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
             />
           </div>
 
@@ -176,26 +152,27 @@ export function ContactForm() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows={4}
-              className="w-full px-3 py-2 border rounded-md bg-background dark:border-muted"
-              placeholder="How can we help?"
               required
+              rows={4}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
             />
           </div>
 
-          {formStatus.message && (
-            <div className={`p-3 rounded-md ${
-              formStatus.type === 'success' 
-                ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200' 
-                : 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200'
-            }`}>
+          {formStatus.type && (
+            <div
+              className={`p-4 rounded-lg ${
+                formStatus.type === 'success'
+                  ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100'
+                  : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100'
+              }`}
+            >
               {formStatus.message}
             </div>
           )}
 
-          <Button 
-            type="submit" 
-            className="w-full" 
+          <Button
+            type="submit"
+            className="w-full"
             disabled={isSubmitting}
           >
             {isSubmitting ? (

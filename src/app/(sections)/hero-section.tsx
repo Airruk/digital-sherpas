@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/design-system/atoms/Button";
@@ -35,9 +35,30 @@ const logos = [
   }
 ];
 
+function LogoImage({ logo }: { logo: typeof logos[0] }) {
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <Image
+      src={resolvedTheme === 'dark' ? logo.dark : logo.light}
+      alt={logo.name}
+      width={200}
+      height={100}
+      className={`w-auto opacity-75 hover:opacity-100 transition-opacity duration-150 ${logo.className}`}
+    />
+  );
+}
+
 export function HeroSection() {
-  const { theme } = useTheme();
-  
   return (
     <section className="py-16 md:pt-24 md:pb-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -49,20 +70,25 @@ export function HeroSection() {
             </h1>
             <p className="text-lg mt-4 text-muted-foreground max-w-xl">
               Digital Sherpas delivers hands-on product leadership through our 
-              Product Management-as-a-Service (PMaaS) model. From idea validation 
-              to market success, we guide your product journey with proven expertise.
+              Product Management-as-a-Service (PMaaS) solution.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <CalendlyButton>
                 <Button 
                   size="lg" 
-                  className="flex gap-1 items-center justify-center"
+                  variant="primary"
+                  className="flex gap-1 items-center justify-center w-full sm:w-auto"
                 >
                   Schedule a Free Discovery Call
                   <ArrowRightIcon className="w-4 h-4 ml-1" />
                 </Button>
               </CalendlyButton>
-              <Button asChild variant="outline" size="lg" className="flex gap-1 items-center justify-center">
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className="flex gap-1 items-center justify-center"
+              >
                 <Link href="#services">
                   View Our Services
                   <ArrowRightIcon className="w-4 h-4 ml-1" />
@@ -70,7 +96,7 @@ export function HeroSection() {
               </Button>
             </div>
           </div>
-          <div className="py-6 order-1 lg:order-2 relative w-full max-w-md">
+          <div className="flex items-center justify-center order-1 lg:order-2">
             <Image
               src="/images/ds-logo.png"
               alt="Digital Sherpas Logo"
@@ -90,13 +116,7 @@ export function HeroSection() {
         <div className="flex flex-wrap gap-12 md:gap-16 items-center justify-center mt-8 max-w-4xl mx-auto">
           {logos.map((logo, index) => (
             <div key={index} className="flex items-center justify-center">
-              <Image
-                src={theme === 'dark' ? logo.dark : logo.light}
-                alt={logo.name}
-                width={200}
-                height={100}
-                className={`w-auto opacity-75 hover:opacity-100 transition-opacity duration-150 ${logo.className}`}
-              />
+              <LogoImage logo={logo} />
             </div>
           ))}
         </div>

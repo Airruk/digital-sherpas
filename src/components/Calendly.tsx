@@ -14,28 +14,34 @@ declare global {
 
 const CALENDLY_URL = 'https://calendly.com/ericdoster/intro-consult?hide_event_type_details=1';
 
-export function initializeCalendly() {
-  if (typeof window !== 'undefined' && window.Calendly) {
-    window.Calendly.showPopupWidget(CALENDLY_URL);
-  } else {
-    console.warn('Calendly is not loaded yet');
-  }
-}
-
 export function CalendlyButton({ children }: { children: React.ReactNode }) {
-  const [isCalendlyReady, setIsCalendlyReady] = useState(false);
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
   useEffect(() => {
+    // Check if Calendly is already loaded
     if (typeof window !== 'undefined' && window.Calendly) {
-      setIsCalendlyReady(true);
+      setIsScriptLoaded(true);
     }
+
+    // Add a listener for when the script loads
+    const handleScriptLoad = () => {
+      if (window.Calendly) {
+        setIsScriptLoaded(true);
+      }
+    };
+
+    window.addEventListener('calendly:ready', handleScriptLoad);
+
+    return () => {
+      window.removeEventListener('calendly:ready', handleScriptLoad);
+    };
   }, []);
 
   const handleClick = () => {
-    if (isCalendlyReady) {
+    if (isScriptLoaded && window.Calendly) {
       window.Calendly.showPopupWidget(CALENDLY_URL);
     } else {
-      console.warn('Calendly is not ready yet');
+      console.warn('Calendly is not ready yet. Please try again in a moment.');
     }
   };
 
@@ -55,9 +61,12 @@ export function CalendlyScripts() {
       />
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="beforeInteractive"
-        onLoad={() => {
-          console.log('Calendly script loaded');
+        strategy="lazyOnload"
+        onReady={() => {
+          // Dispatch a custom event when Calendly is ready
+          if (typeof window !== 'undefined' && window.Calendly) {
+            window.dispatchEvent(new Event('calendly:ready'));
+          }
         }}
       />
     </>

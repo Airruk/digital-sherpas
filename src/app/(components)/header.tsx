@@ -34,7 +34,7 @@ export function Header() {
             <Link href="/"
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Home
+              Overview
             </Link>
             <Link href="/contact"
               className="text-sm font-medium hover:text-primary transition-colors"
@@ -77,7 +77,7 @@ export function Header() {
               className="text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              Overview
             </Link>
             <Link href="/contact"
               className="text-sm font-medium hover:text-primary transition-colors"

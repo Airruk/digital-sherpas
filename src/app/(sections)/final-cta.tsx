@@ -1,9 +1,9 @@
 'use client';
 
 import React from "react";
-import Link from "next/link";
 import { Button } from "@/components/design-system/atoms/Button";
 import { ArrowRightIcon } from "lucide-react";
+import { CalendlyButton } from "@/components/Calendly";
 
 export function FinalCTA() {
   return (
@@ -16,12 +16,12 @@ export function FinalCTA() {
           Let&apos;s discuss how our PMaaS solution can accelerate your product success.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button asChild size="lg" className="flex gap-1 items-center justify-center">
-            <Link href="#contact">
+          <CalendlyButton>
+            <Button size="lg" className="flex gap-1 items-center justify-center">
               Schedule a Free Discovery Call
               <ArrowRightIcon className="w-4 h-4 ml-1" />
-            </Link>
-          </Button>
+            </Button>
+          </CalendlyButton>
         </div>
       </div>
     </section>
