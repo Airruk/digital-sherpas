@@ -1,141 +1,39 @@
-'use client';
-
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ThemeToggle } from "./(components)/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { MenuIcon, XIcon } from "lucide-react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { CalendlyScripts } from "@/components/Calendly";
+import { ClientLayout } from "./(components)/client-layout";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const inter = Inter({ subsets: ["latin"] });
 
+export const metadata: Metadata = {
+  title: "Digital Sherpas - Product Management as a Service",
+  description: "We guide your product journey with proven expertise.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-        <body>
-            <div className="min-h-screen bg-background text-foreground">
-      <header
-        className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border"
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/images/ds-logo.png"
-                alt="Digital Sherpas"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
-
-              <span className="font-bold text-xl">
-                Digital Sherpas
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Home
-              </Link>
-              <Link href="/contact"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Contact
-              </Link>
-              <ThemeToggle />
-              <Button asChild variant="default">
-                <Link href="/contact">
-                  Get Started
-                </Link>
-              </Button>
-            </nav>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-4">
-              <ThemeToggle />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? (
-                  <XIcon className="h-5 w-5" />
-                ) : (
-                  <MenuIcon className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-border">
-            <nav
-              className="container mx-auto px-4 py-4 flex flex-col space-y-4"
-            >
-              <Link href="/"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link href="/contact"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              <Button asChild variant="default" className="w-full">
-                <Link href="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Get Started
-                </Link>
-              </Button>
-            </nav>
-          </div>
-        )}
-      </header>
-
-      <main className="pt-16">
-        {children}
-      </main>
-
-      <footer className="border-t border-border mt-20">
-        <div className="container mx-auto px-4 py-8">
-          <div
-            className="flex flex-col md:flex-row justify-between items-center"
-          >
-            <div
-              className="flex items-center space-x-2 mb-4 md:mb-0"
-            >
-              <Image
-                src="/images/ds-logo.png"
-                alt="Digital Sherpas"
-                width={24}
-                height={24}
-                className="h-6 w-6"
-              />
-
-              <span className="font-medium">
-                Digital Sherpas
-              </span>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Digital Sherpas. All rights
-              reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-        </body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <CalendlyScripts />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </ThemeProvider>
+      </body>
     </html>
-
   );
 }

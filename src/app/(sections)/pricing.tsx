@@ -1,104 +1,95 @@
 'use client';
 
 import React from "react";
-import Link from "next/link";
-import { Typography } from "@/components/design-system/atoms/Typography";
-import { Card } from "@/components/design-system/molecules/Card";
 import { Button } from "@/components/design-system/atoms/Button";
-import { Clock, Target, Settings } from "lucide-react";
-import { Icon } from "@/components/design-system/atoms/Icon";
+import { ArrowRightIcon } from "lucide-react";
+import { initializeCalendly } from "@/components/Calendly";
 
-const plans = [
+const tiers = [
   {
-    title: "Monthly Retainer",
-    description: "Flexible support for ongoing product needs",
-    icon: Clock,
-    packages: [
-      "Bronze (10 hours/month)",
-      "Silver (20 hours/month)",
-      "Gold (40 hours/month)"
-    ],
-    idealFor: "Founders who want ad-hoc support or consistent engagements for bigger teams"
+    name: "Startup Accelerator",
+    description: "Perfect for early-stage startups needing focused product guidance.",
+    price: "Starting at $5k/mo",
+    features: [
+      "2-3 days per week of dedicated product leadership",
+      "Product strategy development",
+      "MVP definition and roadmap",
+      "Development team coordination",
+      "User research and validation",
+      "Weekly progress reports"
+    ]
   },
   {
-    title: "Fixed Project Scope",
-    description: "Defined timeline and outcomes",
-    icon: Target,
-    packages: [
-      "MVP Launch Package",
-      "Product Discovery Sprint",
-      "Go-to-Market Strategy"
-    ],
-    idealFor: "Teams with specific project goals and timelines"
+    name: "Growth Engine",
+    description: "Ideal for scaling companies requiring comprehensive product management.",
+    price: "Starting at $10k/mo",
+    features: [
+      "Full-time product leadership",
+      "Product strategy and vision",
+      "Agile process implementation",
+      "Team mentoring and training",
+      "Stakeholder management",
+      "KPI definition and tracking"
+    ]
   },
   {
-    title: "Bespoke Arrangements",
-    description: "Custom solutions for unique needs",
-    icon: Settings,
-    packages: [
-      "Enterprise transformations",
-      "Team training & coaching",
-      "Full product org setup"
-    ],
-    idealFor: "Organizations needing comprehensive product leadership"
+    name: "Enterprise Innovation",
+    description: "For established organizations launching new product initiatives.",
+    price: "Custom pricing",
+    features: [
+      "Dedicated product team",
+      "Innovation framework setup",
+      "Cross-functional coordination",
+      "Risk management",
+      "Compliance oversight",
+      "Executive reporting"
+    ]
   }
 ];
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-16 md:py-24 bg-muted/50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <Typography variant="h2" className="mb-4">
-            Engagement Model & Pricing
-          </Typography>
-          <Typography variant="body" className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Flexible options tailored to your product journey
-          </Typography>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {plans.map((plan, index) => (
-            <Card key={index} className="p-6">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
-                  <Icon icon={plan.icon} className="text-primary" />
-                </div>
-                <div>
-                  <Typography variant="h3" className="mb-1">
-                    {plan.title}
-                  </Typography>
-                  <Typography variant="body" className="text-sm text-muted-foreground">
-                    {plan.description}
-                  </Typography>
-                </div>
+    <section id="pricing" className="scroll-mt-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24">
+        <h2 className="text-4xl lg:text-5xl font-bold lg:tracking-tight text-center">
+          Flexible Engagement Models
+        </h2>
+        <p className="text-lg mt-4 text-muted-foreground text-center max-w-xl mx-auto">
+          Choose the right level of support for your product journey
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-10 mx-auto mt-12">
+          {tiers.map((tier, index) => (
+            <div key={index} className="bg-background border border-muted rounded-lg p-8">
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold">{tier.name}</h3>
+                <p className="text-muted-foreground mt-2">{tier.description}</p>
+              </div>
+              <div className="mb-8">
+                <p className="text-3xl font-bold">{tier.price}</p>
               </div>
               <div className="space-y-4 mb-6">
-                <Typography variant="h4" className="text-sm font-medium">
+                <h4 className="text-sm font-medium">
                   Includes:
-                </Typography>
+                </h4>
                 <ul className="space-y-2">
-                  {plan.packages.map((pkg, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className="w-1 h-1 rounded-full bg-primary" />
-                      {pkg}
+                  {tier.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <div className="pt-2">
-                  <Typography variant="h4" className="text-sm font-medium mb-1">
-                    Ideal for:
-                  </Typography>
-                  <Typography variant="body" className="text-sm text-muted-foreground">
-                    {plan.idealFor}
-                  </Typography>
-                </div>
               </div>
-              <Button asChild variant="outline" className="w-full">
-                <Link href="#contact">
-                  Learn More
-                </Link>
+              <Button 
+                variant={index === 1 ? "primary" : "outline"} 
+                className="w-full"
+                onClick={initializeCalendly}
+              >
+                Get Started
+                <ArrowRightIcon className="w-4 h-4 ml-1" />
               </Button>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

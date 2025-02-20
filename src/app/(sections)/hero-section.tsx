@@ -5,31 +5,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/design-system/atoms/Button";
 import { ArrowRightIcon } from "lucide-react";
+import { CalendlyButton } from "@/components/Calendly";
+import { useTheme } from "next-themes";
 
 const logos = [
-  { 
-    src: "/logos/bfb-logo.webp", 
-    alt: "Better For Business",
+  {
+    name: "Better For Business",
+    light: "/logos/bfb-logo-light.webp",
+    dark: "/logos/bfb-logo-dark.webp",
     className: "h-8 md:h-10"
   },
-  { 
-    src: "/logos/echo-logo.png", 
-    alt: "Echo",
+  {
+    name: "Echo",
+    light: "/logos/echo-logo-light.png",
+    dark: "/logos/echo-logo-dark.png",
     className: "h-6 md:h-8"
   },
-  { 
-    src: "/logos/Parable-Group-Logo.png", 
-    alt: "Parable Group",
+  {
+    name: "Parable Group",
+    light: "/logos/Parable-Group-light.png",
+    dark: "/logos/Parable-Group-dark.png",
     className: "h-8 md:h-10"
   },
-  { 
-    src: "/logos/SRS-logo.png", 
-    alt: "SRS",
+  {
+    name: "SRS",
+    light: "/logos/SRS-logo-light.png",
+    dark: "/logos/SRS-logo-dark.png",
     className: "h-7 md:h-9"
-  },
+  }
 ];
 
 export function HeroSection() {
+  const { theme } = useTheme();
+  
   return (
     <section className="py-16 md:pt-24 md:pb-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -45,12 +53,15 @@ export function HeroSection() {
               to market success, we guide your product journey with proven expertise.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="flex gap-1 items-center justify-center">
-                <Link href="#contact">
+              <CalendlyButton>
+                <Button 
+                  size="lg" 
+                  className="flex gap-1 items-center justify-center"
+                >
                   Schedule a Free Discovery Call
                   <ArrowRightIcon className="w-4 h-4 ml-1" />
-                </Link>
-              </Button>
+                </Button>
+              </CalendlyButton>
               <Button asChild variant="outline" size="lg" className="flex gap-1 items-center justify-center">
                 <Link href="#services">
                   View Our Services
@@ -80,11 +91,11 @@ export function HeroSection() {
           {logos.map((logo, index) => (
             <div key={index} className="flex items-center justify-center">
               <Image
-                src={logo.src}
-                alt={logo.alt}
+                src={theme === 'dark' ? logo.dark : logo.light}
+                alt={logo.name}
                 width={200}
                 height={100}
-                className={`w-auto opacity-75 hover:opacity-100 transition-opacity duration-150 dark:brightness-[1.2] dark:contrast-[1.2] ${logo.className}`}
+                className={`w-auto opacity-75 hover:opacity-100 transition-opacity duration-150 ${logo.className}`}
               />
             </div>
           ))}
